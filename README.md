@@ -61,3 +61,85 @@ llmstat calibrate --human-data human.csv --llm-data llm.csv
 # Run TOST validation
 llmstat validate --human-estimate 0.76 --llm-estimate 0.78 --margin 0.02
 ```
+
+---
+
+## What the theory actually says — and what it does not
+
+**Short answer: yes — but only in a specific, well-defined sense.**
+
+The paper's framework establishes:
+
+> An LLM is a misspecified estimator of conditional expectations under squared loss.
+
+So it can be used as a statistical tool when:
+
+- the task is **prediction of a measurable outcome**
+- the target is a **conditional mean or smooth functional**
+- the loss is approximately **squared error or Bregman-type**
+
+### When LLMs ARE valid statistical tools
+
+| Use case | Why it works |
+|----------|-------------|
+| Survey response prediction | LLM estimates conditional mean of bounded responses |
+| Average treatment effect approximation (under strong assumptions) | Linear contrast of conditional means |
+| Conditional mean estimation | Direct target of the framework |
+| Missing-value imputation | Functional estimator of E[Y\|X] |
+
+This matches the core abstraction: `T(P) = E[Y | X]`.
+
+LLMs reduce cost when:
+
+- human sampling is expensive
+- variance dominates measurement error
+- calibration bias is controlled
+
+So they behave like: **a cheap Monte Carlo surrogate for conditional expectations.**
+
+From the calibration protocol: if bias `b̂` is small, variance ratio `λ̂` is bounded, and identifiability error `δ` is controlled, then LLMs can substitute human samples with corrected scaling.
+
+### When LLMs are NOT valid statistical tools
+
+| Limitation | Why it fails |
+|------------|-------------|
+| Causal inference without structure | LLMs do not identify counterfactual effects, structural parameters, or intervention mechanisms |
+| Novel experimental regimes | If P(new condition) ∉ support of training data, KL projection is uninformative and ε_rep dominates |
+| Mechanism discovery | LLMs approximate outcomes, not generative processes — cannot replace cognitive models, causal graphs, or mechanistic experiments |
+
+### Cost reduction: YES, but only in a specific regime
+
+The framework implies: Total Risk = Irreducible variance + ε_rep² + o(1).
+
+Cost reduction is valid if:
+
+- ε_rep is small or calibrated
+- δ is controlled
+- the model class is sufficiently rich
+
+**Interpretation:** LLMs act like a **variance-reducing surrogate estimator with fixed bias floor**. They reduce cost by replacing repeated human sampling with high-volume synthetic sampling.
+
+### The key insight
+
+> LLMs are NOT replacements for experiments. They are **low-cost estimators of conditional expectations in a fixed statistical model class.**
+
+That is much narrower — but also mathematically correct.
+
+### Practical takeaway
+
+**Safely use LLMs as:**
+
+- survey simulators (with calibration)
+- expectation estimators
+- bootstrap-like augmentation tools
+- approximate risk estimators
+
+**Do NOT use them as:**
+
+- substitutes for causal experiments
+- ground-truth human behavior generators
+- validation sources for novel phenomena
+
+### One-line answer
+
+> Yes — LLMs can be used as statistical tools to reduce cost, but only as calibrated misspecified estimators of conditional expectations under squared-loss regimes, not as general substitutes for experimental or causal inference.
