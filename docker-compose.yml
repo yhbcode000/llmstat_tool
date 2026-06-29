@@ -1,0 +1,38 @@
+services:
+  localai:
+    image: localai/localai:latest-gpu-nvidia-cuda-12
+    container_name: llmstat-localai
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./localai_models:/build/models:cached
+    environment:
+      - DEBUG=true
+      - THREADS=8
+      - MODELS_PATH=/build/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    profiles:
+      - gpu
+
+  localai-cpu:
+    image: localai/localai:latest
+    container_name: llmstat-localai-cpu
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./localai_models:/build/models:cached
+    environment:
+      - DEBUG=true
+      - THREADS=4
+      - MODELS_PATH=/build/models
+    profiles:
+      - cpu
+
+  # Quick-start: docker compose --profile cpu up -d
+  # Then: docker compose exec localai-cpu local-ai run llama-3.2-3b-instruct

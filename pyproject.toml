@@ -1,0 +1,48 @@
+# LLMStat — Calibrated LLM Estimator Tool
+#
+# Prerequisites: Python ≥3.10, Docker (for localai backend)
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llmstat"
+version = "0.1.0"
+description = "Calibrated LLM Estimator for Human-Subject Statistical Research"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Haobo Yang", email = "yhbcode000@foxmail.com"}
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "httpx>=0.25",
+    "python-dotenv>=1.0",
+    "pydantic>=2.0",
+    "rich>=13.0",
+    "click>=8.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+llmstat = "llmstat.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
