@@ -144,6 +144,24 @@ That is much narrower — but also mathematically correct.
 
 > Yes — LLMs can be used as statistical tools to reduce cost, but only as calibrated misspecified estimators of conditional expectations under squared-loss regimes, not as general substitutes for experimental or causal inference.
 
-## References
+## Examples
+
+Run the web A/B testing demonstration (no API keys needed, uses synthetic data):
+
+```bash
+python examples/web_ab_test.py
+```
+
+This runs three web A/B testing scenarios through the full calibration pipeline:
+headline CTR tests, landing page conversion, and button color click-through.
+See `examples/web_ab_test.py` for the full annotated source.
+
+## Citation
+
+This repository implements the methodology from:
+
+- **Yang, H.** *Pretrained Large Language Models as Statistical Instruments: Restricted Risk Equivalence under Squared Loss*.
+
+It is also cited and used as the companion tooling by:
 
 - **Yang, H.** (2026). *Transformer Architectures as Complete Bayes Processes: A Formal Proof in the Measure-Theoretic Kernel Framework*. arXiv:2606.30440 [cs.LG]. [https://arxiv.org/abs/2606.30440](https://arxiv.org/abs/2606.30440)
