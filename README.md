@@ -112,6 +112,18 @@ Two backends are supported, selected via `LLMSTAT_BACKEND` in `.env`:
 |---------|---------|----------|
 | `localai` | ✅ | Docker |
 | `openai` | fallback | API key |
+> **Why LocalAI is the default.** The paper's proof assumes the LLM is
+> trained purely via cross-entropy (next-token prediction), a strictly
+> proper scoring rule that recovers the true conditional distribution or
+> its KL projection (§2.4). Post-training techniques — RLHF, instruction
+> tuning, DPO — replace the training objective with a reward model or
+> preference signal, distorting the learned distribution away from the
+> training-data conditional means. This breaks the statistical guarantees.
+> LocalAI runs **pretrained-only** models (e.g. Llama 3.2 base), preserving
+> the distributional properties the proof depends on. Commercial APIs
+> (OpenAI, Anthropic) ship post-trained models whose conditional-mean
+> estimates may carry uncharacterized alignment bias — use them only as
+> a best-effort fallback, not as a calibrated instrument.
 
 ### LocalAI (Docker)
 

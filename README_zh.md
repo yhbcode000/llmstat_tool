@@ -112,6 +112,14 @@ llmstat run --conditions 2 --calibration 500 --output results/
 |---------|---------|----------|
 | `localai` | ✅ | Docker |
 | `openai` | 回退 | API key |
+> **为什么 LocalAI 是默认后端。** 论文的证明假设 LLM 仅通过交叉熵（下一 token 预测）
+> 进行训练，这是一种严格真分数规则，可恢复真实条件分布或其 KL 投影（§2.4）。
+> 后训练技术——RLHF、指令微调、DPO——用奖励模型或偏好信号替代了训练目标，
+> 将学习到的分布从训练数据条件均值处扭曲偏离。这破坏了统计保证。
+> LocalAI 运行**纯预训练**模型（如 Llama 3.2 base），保留了证明所依赖的
+> 分布性质。商业 API（OpenAI、Anthropic）提供的是后训练模型，其条件均值
+> 估计可能带有未量化的对齐偏差——仅将其作为尽力而为的回退方案使用，
+> 而非校准工具。
 
 ### LocalAI（Docker）
 
