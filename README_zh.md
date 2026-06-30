@@ -158,25 +158,17 @@ python examples/web_ab_test.py
 标题 CTR（点击率）测试、落地页转化率测试、按钮颜色点击率测试。
 详见 `examples/web_ab_test.py` 中完整注释的源代码。
 
-## 引用
+## Citation
 
 ```bibtex
 @article{yang_llmstat,
-  title   = {Pretrained Large Language Models as Statistical Instruments:
-             Restricted Risk Equivalence under Squared Loss},
+  title   = {Using Large Language Models as Low-Cost Statistical
+             Estimators for Human-Response Data},
   author  = {Yang, Haobo},
   year    = {2025},
-  note    = {Preprint. This repository is the companion implementation.}
-}
-
-@article{yang2026transformer,
-  title   = {Transformer Architectures as Complete {Bayes} Processes:
-             A Formal Proof in the Measure-Theoretic Kernel Framework},
-  author  = {Yang, Haobo},
-  year    = {2026},
-  eprint  = {2606.30440},
+  eprint  = {2606.30372},
   archiveprefix = {arXiv},
-  primaryclass  = {cs.LG},
-  note    = {Cites and uses this repository as companion tooling.}
+  primaryclass  = {cs.AI},
+  note    = {This repository is the companion implementation.}
 }
 ```
