@@ -143,3 +143,7 @@ That is much narrower — but also mathematically correct.
 ### One-line answer
 
 > Yes — LLMs can be used as statistical tools to reduce cost, but only as calibrated misspecified estimators of conditional expectations under squared-loss regimes, not as general substitutes for experimental or causal inference.
+
+## References
+
+- **Yang, H.** (2026). *Transformer Architectures as Complete Bayes Processes: A Formal Proof in the Measure-Theoretic Kernel Framework*. arXiv:2606.30440 [cs.LG]. [https://arxiv.org/abs/2606.30440](https://arxiv.org/abs/2606.30440)
