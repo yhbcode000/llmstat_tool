@@ -1,5 +1,7 @@
 # LLMStat — Calibrated LLM Estimator for Human-Subject Research
 
+[中文版](README_zh.md)
+
 A Python implementation of the calibrated LLM estimator methodology described in *"Pretrained Large Language Models as Statistical Instruments: Restricted Risk Equivalence under Squared Loss"*.
 
 ## What the theory actually says — and what it does not
